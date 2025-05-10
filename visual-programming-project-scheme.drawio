@@ -265,32 +265,35 @@
           <mxGeometry x="160" y="310" width="520" height="20" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-64" value="&lt;font style=&quot;font-size: 23px;&quot;&gt;Server (aka Back-End)&lt;/font&gt;" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=80;" parent="1" vertex="1">
-          <mxGeometry x="680.5" y="40" width="949.5" height="840" as="geometry" />
+          <mxGeometry x="680.5" y="40" width="879.5" height="880" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-66" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;PostgreSQL DataBase&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" parent="imhugzPMIuf26zca4qA2-64" vertex="1">
           <mxGeometry x="119.5" y="40" width="160.5" height="200" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-77" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Tables&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="imhugzPMIuf26zca4qA2-64" vertex="1">
-          <mxGeometry x="280.5" y="60" width="140" height="160" as="geometry">
+          <mxGeometry x="280.5" y="60" width="120" height="160" as="geometry">
             <mxRectangle x="280.5" y="60" width="90" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-78" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Users&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="imhugzPMIuf26zca4qA2-77" vertex="1">
-          <mxGeometry y="30" width="140" height="60" as="geometry" />
+          <mxGeometry y="30" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-79" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Articles&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="imhugzPMIuf26zca4qA2-77" vertex="1">
-          <mxGeometry y="90" width="140" height="70" as="geometry" />
+          <mxGeometry y="80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_kIBeZDsvC1ux06xiSU-7" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Reviews&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="imhugzPMIuf26zca4qA2-77">
+          <mxGeometry y="120" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-94" value="ApplicationContex" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=20;html=1;" parent="imhugzPMIuf26zca4qA2-64" vertex="1">
-          <mxGeometry x="119.5" y="560" width="310" height="240" as="geometry">
+          <mxGeometry x="119.5" y="560" width="320" height="280" as="geometry">
             <mxRectangle x="800" y="320" width="80" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="imhugzPMIuf26zca4qA2-99" value="&lt;ul&gt;&lt;li&gt;Add - Add new User or Article to DB&lt;br&gt;&lt;/li&gt;&lt;li&gt;Update - Update User or Arcticle with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;RemoveUser - Remove User&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;RemoveArticle - Remove Article with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;GetUserById - Return User&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;GetArticleById - Return Article&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;Users - Return all users&lt;/li&gt;&lt;li&gt;Articles - Return all articles&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="imhugzPMIuf26zca4qA2-94" vertex="1">
-          <mxGeometry y="20" width="310" height="220" as="geometry" />
+        <mxCell id="imhugzPMIuf26zca4qA2-99" value="&lt;ul&gt;&lt;li&gt;Add - Add new User, Article or Review to DB&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;Update - Update User, Arcticle&amp;nbsp;&amp;nbsp;or Review&amp;nbsp;with&amp;nbsp;specific Id&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;RemoveUser - Remove User&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;RemoveArticle - Remove Article with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;RemoveReview&amp;nbsp;- Remove Review with&amp;nbsp;specific Id&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;GetUserById - Return User&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;GetArticleById - Return Article&amp;nbsp;with&amp;nbsp;specific Id&lt;/li&gt;&lt;li&gt;GetReviewById - Return Review with&amp;nbsp;specific Id&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;Users - Return all users&lt;/li&gt;&lt;li&gt;Articles - Return all articles&lt;/li&gt;&lt;li&gt;Reviews - Return all reviews&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="imhugzPMIuf26zca4qA2-94" vertex="1">
+          <mxGeometry y="20" width="320" height="260" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-100" value="Maps" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=20;html=1;" parent="imhugzPMIuf26zca4qA2-64" vertex="1">
-          <mxGeometry x="560.5" y="40" width="360" height="280" as="geometry">
+          <mxGeometry x="479.5" y="560" width="360" height="280" as="geometry">
             <mxRectangle x="800" y="320" width="80" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -301,7 +304,7 @@
           <mxGeometry x="-520" y="40" width="680" height="800" as="geometry" />
         </mxCell>
         <mxCell id="imhugzPMIuf26zca4qA2-85" value="Models" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=20;html=1;" parent="1" vertex="1">
-          <mxGeometry x="800" y="320" width="400" height="240" as="geometry">
+          <mxGeometry x="800" y="320" width="680" height="240" as="geometry">
             <mxRectangle x="800" y="320" width="80" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -318,8 +321,16 @@
             <mxRectangle x="40" y="20" width="40" height="220" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="imhugzPMIuf26zca4qA2-93" value="&lt;ul&gt;&lt;li&gt;uint64: Id&lt;/li&gt;&lt;li&gt;string: Title&lt;/li&gt;&lt;li&gt;string: Category&lt;/li&gt;&lt;li&gt;string: Content&lt;/li&gt;&lt;li&gt;string: ImageName&lt;/li&gt;&lt;li&gt;string: ImageExpansion&lt;/li&gt;&lt;li&gt;string: ArticleName&lt;/li&gt;&lt;li&gt;string: ArticleExpansion&lt;/li&gt;&lt;li&gt;array: Tags&lt;/li&gt;&lt;li&gt;uint64: UserId&lt;/li&gt;&lt;li&gt;string: Status&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="imhugzPMIuf26zca4qA2-87" vertex="1">
+        <mxCell id="imhugzPMIuf26zca4qA2-93" value="&lt;ul&gt;&lt;li&gt;uint64: Id&lt;/li&gt;&lt;li&gt;string: Title&lt;/li&gt;&lt;li&gt;string: Category&lt;/li&gt;&lt;li&gt;string: Content&lt;/li&gt;&lt;li&gt;string: ImageName&lt;/li&gt;&lt;li&gt;string: ArticleName&lt;/li&gt;&lt;li&gt;array: Tags&lt;/li&gt;&lt;li&gt;uint64: UserId&lt;/li&gt;&lt;li&gt;string: Status&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" parent="imhugzPMIuf26zca4qA2-87" vertex="1">
           <mxGeometry y="20" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="s_kIBeZDsvC1ux06xiSU-1" value="Reviews" style="swimlane;startSize=20;html=1;" vertex="1" parent="imhugzPMIuf26zca4qA2-85">
+          <mxGeometry x="400" y="20" width="280" height="220" as="geometry">
+            <mxRectangle x="40" y="20" width="40" height="220" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s_kIBeZDsvC1ux06xiSU-2" value="&lt;ul&gt;&lt;li&gt;uint64: Id&lt;/li&gt;&lt;li&gt;uint64: ArticleId&lt;/li&gt;&lt;li&gt;int: Rating&lt;/li&gt;&lt;li&gt;string: Recommendation&lt;/li&gt;&lt;li&gt;string: TechnicalMerit&lt;/li&gt;&lt;li&gt;string: Originality&lt;/li&gt;&lt;li&gt;string: PresentationQuality&lt;/li&gt;&lt;li&gt;string: CommentsToAuthors&lt;/li&gt;&lt;li&gt;string: ConfidentialCommentsToEditor&lt;/li&gt;&lt;li&gt;array: AttachmentsNames&lt;/li&gt;&lt;li&gt;bool: IsDraft&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="s_kIBeZDsvC1ux06xiSU-1">
+          <mxGeometry y="20" width="280" height="200" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
