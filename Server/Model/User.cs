@@ -11,6 +11,6 @@ namespace Server.Model
         public string? Bio { get; set; } = null;
         public List<string>? SocialLinks { get; set; } = null;
         public string Role { get; set; } = "writer";
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; } = DateTime.UtcNow;
     }
 }
