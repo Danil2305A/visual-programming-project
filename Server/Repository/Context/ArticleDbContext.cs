@@ -5,47 +5,49 @@ namespace Server.Repository.Context
 {
     public class ArticleDbContext : DbContext, IDbContext<Article>
     {
-        private readonly DbSet<Article>? _articles;
+        public DbSet<Article> Articles { get; set; } = null!;
 
         public ArticleDbContext(DbContextOptions<ArticleDbContext> options) : base(options)
         { Database.EnsureCreated(); }
 
         public Article? Get(Guid id)
-        { return _articles?.Find(id); }
+        { return Articles?.Find(id); }
 
-        public IEnumerable<Article>? GetAll()
-        { return _articles; }
+        public IEnumerable<Article> GetAll()
+        { return Articles; }
 
         public bool Remove(Guid id)
         {
-            var find_item = _articles?.Find(id);
-            if (find_item != null)
+            var findItem = Articles?.Find(id);
+            if (findItem != null)
             {
-                _articles?.Remove(find_item);
+                Articles?.Remove(findItem);
                 SaveChanges();
+                return true;
             }
-            return find_item != null;
+            return false;
         }
 
         public bool Update(Guid id, Article item)
         {
-            var find_item = _articles?.Find(id);
-            if (find_item != null)
+            var findItem = Articles?.Find(id);
+            if (findItem != null)
             {
                 item.Id = id;
-                find_item = item;
-                find_item.LastUpdate = DateTime.UtcNow;
-                _articles?.Update(find_item);
+                findItem = item;
+                findItem.LastUpdate = DateTime.UtcNow;
+                Articles?.Update(findItem);
                 SaveChanges();
+                return true;
             }
-            return find_item != null;
+            return false;
         }
 
         public async void Add(Article newItem)
         {
-            if (_articles != null)
+            if (Articles != null)
             {
-                await _articles.AddAsync(newItem);
+                await Articles.AddAsync(newItem);
                 SaveChanges();
             }
         }
