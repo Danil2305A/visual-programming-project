@@ -6,6 +6,6 @@ namespace Server.Repository.Context
         bool Update(Guid id, Model item);
         bool Remove(Guid id);
         Model? Get(Guid id);
-        IEnumerable<Model>? GetAll();
+        IEnumerable<Model> GetAll();
     }
 }

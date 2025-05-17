@@ -1,6 +1,15 @@
-@Server_HostAddress = http://localhost:5149
+@Server_HostAddress = https://localhost:7239
 
-GET {{Server_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{Server_HostAddress}}/articles
+Content-Type: application/json
+
+{
+  "title": "ML For Babies",
+  "category": "machine learning",
+  "description": "Machine learning for babies",
+  "articleName": "MLForBabies.pdf",
+  "tags": null,
+  "userId": "f54dfe30-918d-49ec-af29-f4f6cb6927f9"
+}
 
 ###
