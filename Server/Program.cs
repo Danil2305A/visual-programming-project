@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Extension;
 using Server.Model;
 using Server.Repository;
+using Server.Repository.Auth;
 using Server.Repository.Context;
 using Server.Service;
 
