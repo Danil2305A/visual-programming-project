@@ -6,6 +6,7 @@ using Server.Repository.Context;
 using Server.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
 builder.Services.AddCors(options =>
 {
@@ -19,14 +20,16 @@ builder.Services.AddCors(options =>
 });
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
 
-builder.Services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
-builder.Services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
-builder.Services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
-
-builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
-builder.Services.AddScoped<ArticleService>(options =>
+services.AddScoped<IArticleRepository, ArticleRepository>();
+services.AddScoped<ArticleService>(options =>
     new ArticleService(options.GetService<IArticleRepository>(), builder.Configuration["FileStorage:ArticlePathDirectory"]));
+
+services.AddScoped<IJwtProvider, JwtProvider>();
+services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 var app = builder.Build();
 
