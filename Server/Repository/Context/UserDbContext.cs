@@ -5,23 +5,23 @@ namespace Server.Repository.Context
 {
     public class UserDbContext : DbContext, IDbContext<User>
     {
-        private readonly DbSet<User>? _users;
+        public DbSet<User> Users { get; set; } = null!;
 
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         { Database.EnsureCreated(); }
 
         public User? Get(Guid id)
-        { return _users?.Find(id); }
+        { return Users?.Find(id); }
 
-        public IEnumerable<User>? GetAll()
-        { return _users; }
+        public IEnumerable<User> GetAll()
+        { return Users; }
 
         public bool Remove(Guid id)
         {
-            var find_item = _users?.Find(id);
+            var find_item = Users?.Find(id);
             if (find_item != null)
             {
-                _users?.Remove(find_item);
+                Users?.Remove(find_item);
                 SaveChanges();
             }
             return find_item != null;
@@ -29,12 +29,12 @@ namespace Server.Repository.Context
 
         public bool Update(Guid id, User item)
         {
-            var find_item = _users?.Find(id);
+            var find_item = Users?.Find(id);
             if (find_item != null)
             {
                 item.Id = id;
                 find_item = item;
-                _users?.Update(find_item);
+                Users?.Update(find_item);
                 SaveChanges();
             }
             return find_item != null;
@@ -42,9 +42,9 @@ namespace Server.Repository.Context
 
         public async void Add(User newItem)
         {
-            if (_users != null)
+            if (Users != null)
             {
-                await _users.AddAsync(newItem);
+                await Users.AddAsync(newItem);
                 SaveChanges();
             }
         }

@@ -1,6 +1,5 @@
 using Server.Model;
 using Server.Service;
-using Server.Contracts;
 
 namespace Server.Endpoint
 {

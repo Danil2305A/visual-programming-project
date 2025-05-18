@@ -12,6 +12,7 @@ namespace Server.Extension
         public static void AddMappendEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapArticlesEndpoints();
+            app.MapReviewEndpoints();
         }
     }
 }

@@ -7,8 +7,9 @@ using Server.Service;
 
 var builder = WebApplication.CreateBuilder();
 var services = builder.Services;
+var configuration = builder.Configuration;
 
-builder.Services.AddCors(options =>
+services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
@@ -19,14 +20,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+string? connectionString = configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
 services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
 services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
 
 services.AddScoped<IArticleRepository, ArticleRepository>();
 services.AddScoped<ArticleService>(options =>
-    new ArticleService(options.GetService<IArticleRepository>(), builder.Configuration["FileStorage:ArticlePathDirectory"]));
+    new ArticleService(options.GetService<IArticleRepository>(), configuration["FileStorage:ArticlePathDirectory"]));
 
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ReviewService>();
