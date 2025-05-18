@@ -28,6 +28,9 @@ services.AddScoped<IArticleRepository, ArticleRepository>();
 services.AddScoped<ArticleService>(options =>
     new ArticleService(options.GetService<IArticleRepository>(), builder.Configuration["FileStorage:ArticlePathDirectory"]));
 
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<ReviewService>();
+
 var app = builder.Build();
 
 app.UseCors();
