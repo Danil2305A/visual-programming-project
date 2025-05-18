@@ -2,11 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Server.Extension;
 using Server.Model;
 using Server.Repository;
-using Server.Repository.Auth;
 using Server.Repository.Context;
 using Server.Service;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 var services = builder.Services;
 
 builder.Services.AddCors(options =>
@@ -28,9 +27,6 @@ services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.Us
 services.AddScoped<IArticleRepository, ArticleRepository>();
 services.AddScoped<ArticleService>(options =>
     new ArticleService(options.GetService<IArticleRepository>(), builder.Configuration["FileStorage:ArticlePathDirectory"]));
-
-services.AddScoped<IJwtProvider, JwtProvider>();
-services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 var app = builder.Build();
 
