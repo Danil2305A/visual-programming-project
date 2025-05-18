@@ -23,7 +23,10 @@ services.AddCors(options =>
 string? connectionString = configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
 services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
-services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));>
+
+services.AddScoped<IUserRepository, UserRepository>();
+services.AddScoped<UserService>();
 
 services.AddScoped<IArticleRepository, ArticleRepository>();
 services.AddScoped<ArticleService>(options =>
