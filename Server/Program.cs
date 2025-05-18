@@ -1,9 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using Server.Extension;
+using Server.Model;
+using Server.Repository;
+using Server.Repository.Context;
+using Server.Service;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 var services = builder.Services;
+var configuration = builder.Configuration;
 
-builder.Services.AddCors(options =>
+services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
@@ -14,11 +20,22 @@ builder.Services.AddCors(options =>
     });
 });
 
-services.AddScoped<IJwtProvider, JwtProvider>();
-services.AddScoped<IPasswordHasher, PasswordHasher>();
+string? connectionString = configuration.GetConnectionString("DefaultConnection");
+services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
+services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
+
+services.AddScoped<IArticleRepository, ArticleRepository>();
+services.AddScoped<ArticleService>(options =>
+    new ArticleService(options.GetService<IArticleRepository>(), configuration["FileStorage:ArticlePathDirectory"]));
+
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<ReviewService>();
 
 var app = builder.Build();
 
 app.UseCors();
+
+app.AddMappendEndpoints();
 
 app.Run();

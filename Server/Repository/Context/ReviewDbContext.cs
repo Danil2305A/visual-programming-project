@@ -5,23 +5,23 @@ namespace Server.Repository.Context
 {
     public class ReviewDbContext : DbContext, IDbContext<Review>
     {
-        private readonly DbSet<Review>? _reviews;
+        public DbSet<Review> Reviews { get; set; } = null!;
 
         public ReviewDbContext(DbContextOptions<ReviewDbContext> options) : base(options)
         { Database.EnsureCreated(); }
 
         public Review? Get(Guid id)
-        { return _reviews?.Find(id); }
+        { return Reviews?.Find(id); }
 
-        public IEnumerable<Review>? GetAll()
-        { return _reviews; }
+        public IEnumerable<Review> GetAll()
+        { return Reviews; }
 
         public bool Remove(Guid id)
         {
-            var find_item = _reviews?.Find(id);
+            var find_item = Reviews?.Find(id);
             if (find_item != null)
             {
-                _reviews?.Remove(find_item);
+                Reviews?.Remove(find_item);
                 SaveChanges();
             }
             return find_item != null;
@@ -29,12 +29,12 @@ namespace Server.Repository.Context
 
         public bool Update(Guid id, Review item)
         {
-            var find_item = _reviews?.Find(id);
+            var find_item = Reviews?.Find(id);
             if (find_item != null)
             {
                 item.Id = id;
                 find_item = item;
-                _reviews?.Update(find_item);
+                Reviews?.Update(find_item);
                 SaveChanges();
             }
             return find_item != null;
@@ -42,9 +42,9 @@ namespace Server.Repository.Context
 
         public async void Add(Review newItem)
         {
-            if (_reviews != null)
+            if (Reviews != null)
             {
-                await _reviews.AddAsync(newItem);
+                await Reviews.AddAsync(newItem);
                 SaveChanges();
             }
         }
