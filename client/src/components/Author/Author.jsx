@@ -11,7 +11,7 @@ export default function Author() {
         switch(activeTab) {
             case 'info': return <AuthorInfo />;
             case 'articles': return <AuthorArticles />;
-            case 'submit': return <AuthorSubmit />;
+            case 'submit': return <AuthorSubmit AutorId={ } />;
             case 'review': return <AuthorReview />;
             default: return <AuthorInfo />;
         }

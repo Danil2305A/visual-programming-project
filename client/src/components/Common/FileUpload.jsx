@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-export default function FileUpload() {
+export default function FileUpload({ setFile }) {
     const [files, setFiles] = useState([]);
 
     const handleFileChange = (e) => {
         setFiles([...e.target.files]);
+        setFile(e.target.files[0])
     };
 
     const handleDrop = (e) => {

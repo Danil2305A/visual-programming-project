@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import FileUpload from '../Common/FileUpload';
 import Input from "../Common/Input";
+import axios from "axios";
 
-export default function AuthorSubmit() {
+const SERVER_URL = "https://localhost:7239/articles";
+
+export default function AuthorSubmit({ AutorId }) {
     const [formData, setFormData] = useState({
         title: '',
         category: 'Hzshka',
@@ -10,6 +13,7 @@ export default function AuthorSubmit() {
         tags: '',
         agree: false
     });
+    const [file, setFile] = useState(null);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -22,6 +26,23 @@ export default function AuthorSubmit() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // сабмитка
+
+        try {
+            let articleId;
+
+            axios.post(SERVER_URL, {
+                title: formData.title,
+                category: formData.category,
+                description: formData.category,
+                tags: null,
+                articleName: file.name,
+                userId: AutorId
+            }).then(res => { articleId = res.data });
+
+            axios.post(`${SERVER_URL}/file/${articleId}`, file);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -65,7 +86,7 @@ export default function AuthorSubmit() {
             </div>
             <div className="input qwq">
                 <div className="input__title">Featured Document</div>
-                <FileUpload />
+                <FileUpload setFile={setFile} />
             </div>
             <div className="input qwq">
                 <div className="input__title">Tags</div>

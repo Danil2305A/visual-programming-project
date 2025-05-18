@@ -54,18 +54,20 @@ namespace Server.Endpoint
             return Results.NotFound();
         }
 
-        public static async Task<IResult> AddNewArticle(Article article, ArticleService articleService)
+        public static IResult AddNewArticle(Article article, ArticleService articleService)
         {
-            //var article = await request.ReadFromJsonAsync<ArticleRequest>();
             if (articleService.Add(article.Title, article.Category, article.Description, article.UserId, article.ArticleName, article.Tags))
-                return Results.Created();
+            {
+                var articleId = articleService.GetAll()?.First(art => art.Title == article.Title && art.UserId == article.UserId).Id;
+                return Results.Ok(articleId);
+            }
             return Results.Conflict();
         }
 
         public static IResult AddNewArticleFile(Guid id, HttpRequest request, ArticleService articleService)
         {
             articleService.AddFile(id, request.Form.Files[0]);
-            return Results.Created();
+            return Results.Ok();
         }
 
         public static IResult ChangeArticleData(Guid id, Article article, ArticleService articleService)
