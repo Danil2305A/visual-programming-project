@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
 builder.Services.AddCors(options =>
 {
@@ -12,6 +13,9 @@ builder.Services.AddCors(options =>
             .AllowCredentials();
     });
 });
+
+services.AddScoped<IJwtProvider, JwtProvider>();
+services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 var app = builder.Build();
 
