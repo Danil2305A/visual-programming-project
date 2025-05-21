@@ -13,7 +13,7 @@ namespace Server.Model
         public string? CommentsToAuthors { get; set; } = null;
         public string? ConfidentialCommentsToEditor { get; set; } = null;
         public bool IsDraft { get; set; } = false;
-        public DateTime CreatedAt { get; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
         public DateTime LastUpdate { get; set; } = DateTime.UtcNow;
     }
 }

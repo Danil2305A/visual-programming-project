@@ -1,9 +1,21 @@
+import { useState, useEffect } from 'react';
 import ArticleItem from '../Author/ArticleItem';
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
 export default function AdminArticles() {
-    const articles = [
-        { id: 1, title: 'Article 1', author: 'Author 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-    ];
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+        try {
+            const send = async () => {
+                setArticles((await axios.get(`${SERVER_URL}/articles`)).data);
+            };
+            send();
+        } catch (err) {
+            console.error(err);
+        }
+    }, [setArticles]);
 
     return (
         <div className="admin__db-articles">
@@ -12,7 +24,7 @@ export default function AdminArticles() {
                 <div className="articles">
                     <div className="articles__main">
                         {articles.map(article => (
-                            <ArticleItem key={article.id} article={article} />
+                            <ArticleItem key={article.id} article={article}/>
                         ))}
                     </div>
                 </div>

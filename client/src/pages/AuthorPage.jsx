@@ -1,9 +1,9 @@
 import Author from '../components/Author/Author';
 
-export default function AuthorPage() {
+export default function AuthorPage({ user }) {
     return (
         <div className="author-page">
-            <Author />
+            <Author user={user} />
         </div>
     );
 }

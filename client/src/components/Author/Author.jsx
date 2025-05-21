@@ -4,15 +4,15 @@ import AuthorArticles from './AuthorArticles';
 import AuthorSubmit from './AuthorSubmit';
 import AuthorReview from './AuthorReview';
 
-export default function Author() {
+export default function Author({ user }) {
     const [activeTab, setActiveTab] = useState('info');
 
     const renderTab = () => {
-        switch(activeTab) {
-            case 'info': return <AuthorInfo />;
-            case 'articles': return <AuthorArticles />;
-            case 'submit': return <AuthorSubmit AutorId={ } />;
-            case 'review': return <AuthorReview />;
+        switch (activeTab) {
+            case 'info': return <AuthorInfo user={user} />;
+            case 'articles': return <AuthorArticles user={user} />;
+            case 'submit': return <AuthorSubmit user={user} />;
+            case 'review': return <AuthorReview user={user} />;
             default: return <AuthorInfo />;
         }
     };
@@ -25,8 +25,8 @@ export default function Author() {
                         <img src="images/iconUser.svg" className="author__image" alt=""></img>
                     </picture>
                     <div className="author__title">
-                        <div className="author__name">John Doe</div>
-                        <div className="author__role">Technology writer</div>
+                        <div className="author__name">{user.name}</div>
+                        <div className="author__role">{user.specialization}</div>
                     </div>
                 </div>
                 <div className="author__pages">

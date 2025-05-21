@@ -9,7 +9,7 @@ namespace Server.Model
         public required string ArticleName { get; set; }
         public List<string>? Tags { get; set; } = null;
         public Guid UserId { get; set; }
-        public DateTime CreatedAt { get; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
         public DateTime LastUpdate { get; set; } = DateTime.UtcNow;
     }
 }

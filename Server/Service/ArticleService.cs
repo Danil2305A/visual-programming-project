@@ -27,8 +27,9 @@ namespace Server.Service
             if (article != null)
             {
                 var filePath = $"{ArticlesPath}/{article.Title}{article.UserId}{articleFile.FileName}";
-                using var fileStream = new FileStream(filePath, FileMode.Create);
+                var fileStream = new FileStream(filePath, FileMode.Create);
                 await articleFile.CopyToAsync(fileStream);
+                fileStream.Close();
             }
         }
 

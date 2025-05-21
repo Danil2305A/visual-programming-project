@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { SERVER_URL } from '../../utils/fileUtils';
+import axios from 'axios';
 
-export default function Registration({ setIsLogin, setRole }) {
+export default function Registration({ setIsLogin, setUser }) {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         name: '',
-        specification: '',
+        specialization: '',
         location: ''
     });
     const { login } = useAuth();
@@ -20,9 +22,20 @@ export default function Registration({ setIsLogin, setRole }) {
 
     const handleRegister = (e) => {
         e.preventDefault();
+
         // Логика регистрации
-        login({ email: formData.email });
-        setRole('author');
+        try {
+            axios.post(`${SERVER_URL}/users`, {
+                email: formData.email,
+                password: formData.password,
+                name: formData.name,
+                specialization: formData.specialization,
+                location: formData.location,
+            }).then(res => setUser(res.data));
+            login({ email: formData.email });
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -61,8 +74,8 @@ export default function Registration({ setIsLogin, setRole }) {
                 <div className="input__title">Specification</div>
                 <input className="input__text"
                     type="text"
-                    name="specification"
-                    value={formData.specification}
+                    name="specialization"
+                    value={formData.specialization}
                     onChange={handleChange}
                     placeholder="Specification"
                 />

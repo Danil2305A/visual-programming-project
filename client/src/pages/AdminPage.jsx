@@ -1,9 +1,9 @@
 import Admin from '../components/Admin/Admin';
 
-export default function AdminPage() {
+export default function AdminPage({ user }) {
     return (
         <div className="admin-page">
-            <Admin />
+            <Admin user={user} />
         </div>
     );
 }

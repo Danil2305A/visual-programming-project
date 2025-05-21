@@ -3,9 +3,8 @@ import AdminUsers from './AdminUsers';
 import AdminArticles from './AdminArticles';
 import AdminAddNewUser from './AdminAddNewUser';
 
-export default function Admin() {
+export default function Admin({ user }) {
     const [activeTab, setActiveTab] = useState('users');
-    const [showAddUser, setShowAddUser] = useState(false);
 
     return (
         <div className="admin">
@@ -20,7 +19,7 @@ export default function Admin() {
                     <picture className="admin__photo">
                         <img src="/images/iconUser.svg" className="admin__image" alt=""></img>
                     </picture>
-                    <div className="admin__name">John Smith</div>
+                    <div className="admin__name">user.name</div>
                 </div>
             </div>
             <div className="admin__main">
@@ -38,14 +37,9 @@ export default function Admin() {
                         Articles
                     </div>
                 </div>
-
-                {!showAddUser ? (
-                    <div className="admin__db">
-                        {activeTab === 'users' ? <AdminUsers setShowAddUser={setShowAddUser} /> : <AdminArticles />}
-                    </div>
-                ) : (
-                    <AdminAddNewUser setShowAddUser={setShowAddUser} />
-                )}
+                <div className="admin__db">
+                    {activeTab === 'users' ? <AdminUsers user={user} /> : <AdminArticles user={user} />}
+                </div>
             </div>
         </div>
     );

@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ArticleItem from './ArticleItem';
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
-export default function AuthorArticles() {
-    const [articles, setArticles] = useState([
-        { id: 1, title: 'Article 1', author: 'Authodr 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-        { id: 2, title: 'Article 1', author: 'Authasor 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-        { id: 4, title: 'Article 1', author: 'Authosdfr 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-        { id: 3, title: 'Article 1', author: 'Authosr 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-        { id: 5, title: 'Article 1', author: 'Authogr 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-        { id: 6, title: 'Article 1', author: 'Authgor 1', date: 'May 2, 2025', tags: 'Environment', status: 'Pending Review' },
-    ]);
+export default function AuthorArticles({ user }) {
+    const [articles, setArticles] = useState([]);
     const [filter, setFilter] = useState('All Articles');
     const [searchQuery, setSearchQuery] = useState('');
+
+    useEffect(() => {
+        try {
+            const send = async () => {
+                let all_articles = (await axios.get(`${SERVER_URL}/articles`)).data;
+
+                let user_articles = [];
+                for (let article of all_articles) {
+                    if (article.userId === user.id) {
+                        user_articles.push(article);
+                    }
+                }
+                setArticles(user_articles);
+            };
+            send();
+        } catch (err) {
+            console.error(err);
+        }
+    }, [setArticles]);
 
     return (
         <div className="author__articles">
@@ -36,7 +50,7 @@ export default function AuthorArticles() {
                 <div className="articles">
                     <div className="articles__main">
                         {articles.map(article => (
-                            <ArticleItem key={article.id} article={article} />
+                            <ArticleItem article={article} />
                         ))}
                     </div>
                 </div>

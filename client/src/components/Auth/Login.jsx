@@ -1,16 +1,24 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
-export default function Login({ setIsLogin, setRole }) {
+export default function Login({ setIsLogin, setUser }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useAuth();
 
     const handleLogin = (e) => {
         e.preventDefault();
+
         // Логика аутефикации
-        login({ email });
-        setRole('reviewer');
+        try {
+            axios.get(`${SERVER_URL}/users/${email}/${password}`)
+                .then(res => setUser(res.data));
+            login({ email });
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (

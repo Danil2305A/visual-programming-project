@@ -1,223 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import ArticleItem1 from './ArticleItem1';
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
-export default function AuthorReview() {
-    const [articles] = useState([
-        {
-            id: 1,
-            title: 'Hernya 3kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 2,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 3,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 4,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 5,
-            title: 'Hernya kakay3a-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 6,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 61346,
-            title: 'Hernya 3kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 3453452,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 3453453,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 4345345,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 5345345,
-            title: 'Hernya kakay3a-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 63453455,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 1234,
-            title: 'Hernya 3kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 222,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 3233,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 434,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 754,
-            title: 'Hernya kakay3a-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 68,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 18,
-            title: 'Hernya 3kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 27,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 36,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 45,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 12,
-            title: 'Hernya kakay3a-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-        {
-            id: 2323,
-            title: 'Hernya kakaya-to',
-            author: 'Dibil kakoy-to',
-            date: 'May 2, 2025',
-            tags: 'Environment',
-            status: 'Pending Review'
-        },
-    ]);
+export default function AuthorReview({ user }) {
+    const [articles, setArticles] = useState([]);
     const [filter, setFilter] = useState('All Articles');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
     const [displayedArticles, setDisplayedArticles] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
+
     useEffect(() => {
-        const filtered = articles.filter(article => {
-            const matchesFilter = filter === 'All Articles' || article.status === filter;
-            const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                article.author.toLowerCase().includes(searchQuery.toLowerCase());
-            return matchesFilter && matchesSearch;
-        });
-        const total = Math.ceil(filtered.length / itemsPerPage);
-        setTotalPages(total);
-        if (currentPage > total && total > 0) {
-            setCurrentPage(total);
+        try {
+            const send = async () => {
+                const all_articles = (await axios.get(`${SERVER_URL}/articles`)).data;
+                const all_reviews = (await axios.get(`${SERVER_URL}/reviews`)).data;
+
+                let review_articles = [];
+                for (let article of all_articles) {
+                    for (let review of all_reviews) {
+                        if (article.userId === user.id && review.articleId === article.id) {
+                            review_articles.push(article);
+                        }
+                    }
+                }
+                setDisplayedArticles(review_articles);
+            };
+            send();
+        } catch (err) {
+            console.error(err);
         }
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        setDisplayedArticles(filtered.slice(startIndex, endIndex));
-    }, [articles, filter, searchQuery, currentPage, itemsPerPage]);
+
+        //const filtered = articles.filter(article => {
+        //    const matchesFilter = filter === 'All Articles' || article.status === filter;
+        //    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        //        article.author.toLowerCase().includes(searchQuery.toLowerCase());
+        //    return matchesFilter && matchesSearch;
+        //});
+        //const total = Math.ceil(filtered.length / itemsPerPage);
+        //setTotalPages(total);
+        //if (currentPage > total && total > 0) {
+        //    setCurrentPage(total);
+        //}
+        //const startIndex = (currentPage - 1) * itemsPerPage;
+        //const endIndex = startIndex + itemsPerPage;
+        //setDisplayedArticles(filtered.slice(startIndex, endIndex));
+    }, [articles, filter, searchQuery, currentPage, itemsPerPage, setArticles]);
 
     const handlePageChange = (page) => {
         if (page < 1 || page > totalPages) return;
@@ -384,12 +214,12 @@ export default function AuthorReview() {
                 <div className="articles">
                     <div className="articles__main">
                         {displayedArticles.map(article => (
-                            <ArticleItem1 key={article.id} article={article} />
+                            <ArticleItem1 article={article} />
                         ))}
                     </div>
-                    <div className="articles__pagination">
-                        {renderPagination()}
-                    </div>
+                    {/*<div className="articles__pagination">*/}
+                    {/*    {renderPagination()}*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>

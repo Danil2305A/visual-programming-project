@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import Input from '../Common/Input';
 import Button from '../Common/Button';
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
-export default function AuthorInfo() {
+export default function AuthorInfo({ user, setUser }) {
     const [formData, setFormData] = useState({
-        name: 'John Doe',
-        email: 'john@example.com',
-        specialization: 'Technology writer',
-        location: 'New York',
-        bio: '',
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        specialization: user.specialization,
+        location: user.location,
+        bio: user.bio,
         twitter: '',
         linkedin: ''
     });
@@ -23,8 +26,27 @@ export default function AuthorInfo() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         // сабмитка
-        console.log('Profile updated:', formData);
+        try {
+            axios.put(`${SERVER_URL}/users/${user.id}`, {
+                name: formData.name,
+                password: '',
+                email: formData.email,
+                specialization: formData.specialization,
+                location: formData.location,
+            });
+            setUser({
+                id: user.id,
+                name: formData.name,
+                email: formData.email,
+                specialization: formData.specialization,
+                location: formData.location,
+                passwordHash: ''
+            });
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleCancel = () => {

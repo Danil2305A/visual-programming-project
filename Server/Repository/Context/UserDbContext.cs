@@ -42,11 +42,8 @@ namespace Server.Repository.Context
 
         public async void Add(User newItem)
         {
-            if (Users != null)
-            {
-                await Users.AddAsync(newItem);
-                SaveChanges();
-            }
+            await Users.AddAsync(newItem);
+            SaveChanges();
         }
     }
 }

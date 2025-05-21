@@ -4,10 +4,10 @@ import Button from '../Common/Button';
 import RatingStars from '../Common/RatingStars';
 import FileUpload from '../Common/FileUpload';
 
-export default function ReviewerSubmit({ onClose }) {
+export default function ReviewerSubmit({ onClose, user }) {
     const [formData, setFormData] = useState({
         rating: 0,
-        category: 'Hzshka',
+        category: '',
         technical: '',
         originality: '',
         quality: '',
@@ -66,14 +66,13 @@ export default function ReviewerSubmit({ onClose }) {
                     </div>
                     <div className="input">
                         <div className="input__title">Category</div>
-                        <select
+                        <input
                             className="input__text input__text_bold"
                             name="category"
+                            type="text"
                             value={formData.category}
                             onChange={handleInputChange}
-                        >
-                            <option value="Hzshka">Hzshka</option>
-                        </select>
+                        />
                     </div>
                 </div>
 

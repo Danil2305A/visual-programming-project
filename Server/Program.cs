@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Extension;
 using Server.Model;
 using Server.Repository;
+using Server.Repository.Auth;
 using Server.Repository.Context;
 using Server.Service;
 
@@ -23,7 +24,11 @@ services.AddCors(options =>
 string? connectionString = configuration.GetConnectionString("DefaultConnection");
 services.AddDbContext<IDbContext<User>, UserDbContext>(options => options.UseNpgsql(connectionString));
 services.AddDbContext<IDbContext<Article>, ArticleDbContext>(options => options.UseNpgsql(connectionString));
-services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));>
+services.AddDbContext<IDbContext<Review>, ReviewDbContext>(options => options.UseNpgsql(connectionString));
+
+services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+services.AddScoped<IJwtProvider, JwtProvider>();
 
 services.AddScoped<IUserRepository, UserRepository>();
 services.AddScoped<UserService>();

@@ -1,3 +1,5 @@
+export const SERVER_URL = "https://localhost:7239";
+
 export function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;

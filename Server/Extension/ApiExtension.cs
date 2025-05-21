@@ -1,9 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Server.Endpoint;
-using Server.Model;
-using Server.Repository;
-using Server.Repository.Context;
-using Server.Service;
 
 namespace Server.Extension
 {
@@ -11,6 +6,7 @@ namespace Server.Extension
     {
         public static void AddMappendEndpoints(this IEndpointRouteBuilder app)
         {
+            app.MapUsersEndpoints();
             app.MapArticlesEndpoints();
             app.MapReviewEndpoints();
         }

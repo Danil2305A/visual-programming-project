@@ -6,14 +6,16 @@ import AuthorPage from './pages/AuthorPage';
 import ReviewerPage from './pages/ReviewerPage';
 
 function App() {
-    const [role, setRole] = useState(null);
+    const [user, setUser] = useState(null);
 
     const renderPage = () => {
-        switch(role) {
-            case 'admin': return <AdminPage />;
-            case 'author': return <AuthorPage />;
-            case 'reviewer': return <ReviewerPage />;
-            default: return <AuthPage setRole={setRole} />;
+        if (user == null)
+            return <AuthPage setUser={setUser} />;
+        switch (user.role) {
+            case 'admin': return <AdminPage user={user} />;
+            case 'author': return <AuthorPage user={user} />;
+            case 'reviewer': return <ReviewerPage user={user} />;
+            default: return <AuthPage setUser={setUser} />;
         }
     };
 

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import FileUpload from '../Common/FileUpload';
 import Input from "../Common/Input";
-import axios from "axios";
+import axios from 'axios';
+import { SERVER_URL } from '../../utils/fileUtils';
 
-const SERVER_URL = "https://localhost:7239/articles";
-
-export default function AuthorSubmit({ AutorId }) {
+export default function AuthorSubmit({ user }) {
     const [formData, setFormData] = useState({
         title: '',
-        category: 'Hzshka',
+        category: '',
         description: '',
         tags: '',
         agree: false
@@ -25,21 +24,29 @@ export default function AuthorSubmit({ AutorId }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         // сабмитка
-
         try {
-            let articleId;
+            try {
+                const send = async () => {
+                    const articleId = (await axios.post(`${SERVER_URL}/articles`, {
+                        title: formData.title,
+                        category: formData.category,
+                        description: formData.category,
+                        tags: null,
+                        articleName: file.name,
+                        userId: user.id
+                    })).data;
 
-            axios.post(SERVER_URL, {
-                title: formData.title,
-                category: formData.category,
-                description: formData.category,
-                tags: null,
-                articleName: file.name,
-                userId: AutorId
-            }).then(res => { articleId = res.data });
+                    let form = new FormData();
+                    form.append('file', file);
 
-            axios.post(`${SERVER_URL}/file/${articleId}`, file);
+                    await axios.post(`${SERVER_URL}/articles/file/${articleId}`, form);
+                };
+                send();
+            } catch (err) {
+                console.log(err);
+            }
         } catch (err) {
             console.error(err);
         }
@@ -64,14 +71,14 @@ export default function AuthorSubmit({ AutorId }) {
             </div>
             <div className="input qwq">
                 <div className="input__title">Category</div>
-                <select
+                <input
                     className="input__text input__text_bold"
+                    type="text"
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                >
-                    <option value="Hzshka">Hzshka</option>
-                </select>
+                    placeholder="Article Category"
+                />
             </div>
             <div className="input qwq">
                 <div className="input__title">Description</div>

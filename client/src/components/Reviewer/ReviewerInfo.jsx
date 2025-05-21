@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-export default function ReviewerInfo() {
+export default function ReviewerInfo({ user }) {
     const [profile, setProfile] = useState({
-        name: 'John Smith',
-        email: 'john.smith@example.com',
-        specialization: 'Machine Learning',
-        location: 'San Francisco'
+        name: user.name,
+        email: user.email,
+        specialization: user.specialization,
+        location: user.location
     });
 
     const stats = {
@@ -69,18 +69,18 @@ export default function ReviewerInfo() {
             <div className="reviewer__info active">
                 <div className="reviewer__info-title">Review Statistics</div>
                 <div className="reviewer__statistics">
-                    <div className="reviewer__statistic">
-                        <div className="reviewer__statistic-num">{stats.total}</div>
-                        <div className="reviewer__statistic-title">Total Reviews</div>
-                    </div>
-                    <div className="reviewer__statistic">
-                        <div className="reviewer__statistic-num">{stats.progress}</div>
-                        <div className="reviewer__statistic-title">In progress</div>
-                    </div>
-                    <div className="reviewer__statistic">
-                        <div className="reviewer__statistic-num">{stats.completed}</div>
-                        <div className="reviewer__statistic-title">Completed</div>
-                    </div>
+                    {/*<div className="reviewer__statistic">*/}
+                    {/*    <div className="reviewer__statistic-num">{stats.total}</div>*/}
+                    {/*    <div className="reviewer__statistic-title">Total Reviews</div>*/}
+                    {/*</div>*/}
+                    {/*<div className="reviewer__statistic">*/}
+                    {/*    <div className="reviewer__statistic-num">{stats.progress}</div>*/}
+                    {/*    <div className="reviewer__statistic-title">In progress</div>*/}
+                    {/*</div>*/}
+                    {/*<div className="reviewer__statistic">*/}
+                    {/*    <div className="reviewer__statistic-num">{stats.completed}</div>*/}
+                    {/*    <div className="reviewer__statistic-title">Completed</div>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </>

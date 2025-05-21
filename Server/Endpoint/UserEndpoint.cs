@@ -1,118 +1,80 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Server.Contracts;
+using Server.Model;
 using Server.Service;
 
-[ApiController]
-[Route("users")]
-public class UserEndpoints : ControllerBase
+namespace Server.Endpoint
 {
-    private readonly UserService _userService;
-
-    public UserEndpoints(UserService userService)
+    public static class UserEndpoints
     {
-        _userService = userService;
-    }
+        public static IEndpointRouteBuilder MapUsersEndpoints(this IEndpointRouteBuilder app)
+        {
+            app.MapGet("/users", GetAllUsers);
+            app.MapGet("/users/{id}", GetUserById);
+            app.MapGet("/users/{login}/{password}", Login);
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllUsers()
-    {
-        var users = await _userService.GetAll();
-        return Ok(users.Select(u => new { u.Id, u.Email }));
-    }
+            app.MapPost("/users", Register);
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetUserById(Guid id)
-    {
-        var user = await _userService.Get(id);
-        if (user == null)
-            return NotFound();
-        return Ok(new { user.Id, user.Email });
-    }
+            app.MapPut("/users/{id}", ChangeUserData);
+            app.MapPut("/users/{id}/role", ChangeUserRole);
 
-    [HttpPost]
-    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
-    {
-        try
-        {
-            var user = await _userService.Register(request.Email, request.Password);
-            return CreatedAtAction(
-                nameof(GetUserById),
-                new { id = user.Id },
-                new { user.Id, user.Email }
-            );
-        }
-        catch (ArgumentException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
+            app.MapDelete("/users/{id}", RemoveUser);
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request)
-    {
-        try
-        {
-            var user = await _userService.Login(request.Email, request.Password);
-            return Ok(new { user.Id, user.Email });
+            return app;
         }
-        catch (ArgumentException)
-        {
-            return Unauthorized("Invalid credentials");
-        }
-        catch (UnauthorizedAccessException)
-        {
-            return Unauthorized("Invalid credentials");
-        }
-    }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> ChangeUserData(Guid id, [FromBody] UpdateUserRequest request)
-    {
-        try
+        public static IResult GetAllUsers(UserService userService)
+        { return Results.Ok(userService.GetAll()); }
+
+        public static IResult GetUserById(Guid id, UserService userService)
         {
-            var user = await _userService.Update(
-                id,
-                u =>
-                {
-                    if (!string.IsNullOrEmpty(request.Email))
-                        u.Email = request.Email;
-                    if (!string.IsNullOrEmpty(request.Password))
-                        u.PasswordHash = _userService.HashPassword(u, request.Password);
-                }
-            );
-            return Ok(new { user.Id, user.Email });
+            var user = userService.Get(id);
+            if (user == null) return Results.NotFound();
+            user.PasswordHash = "";
+            return Results.Ok(user);
         }
-        catch (ArgumentException)
+
+        public static IResult Login(string login, string password, UserService userService)
         {
-            return NotFound();
+            var user = userService.Login(login, password);
+            if (user != null) return Results.Ok(user);
+            return Results.NotFound();
+        }
+
+        public static IResult Register(UserRequest newUser, UserService userService)
+        {
+            var res = userService.Register(newUser.Email, newUser.Password, newUser.Name, newUser.Specialization, newUser.Location);
+            if (res == null) return Results.Conflict();
+            res.PasswordHash = "";
+            return Results.Ok(res);
+        }
+
+        public static IResult ChangeUserData(Guid id, UserRequest newUser, UserService userService)
+        {
+            userService.Update(id, new User
+            {
+                Email = newUser.Email,
+                Name = newUser.Name,
+                PasswordHash = newUser.Password,
+                Specialization = newUser.Specialization,
+                Location = newUser.Location
+            });
+            return Results.Ok();
+        }
+
+        public static IResult ChangeUserRole(Guid id, UserChangeRoleRequest newRole, UserService userService)
+        {
+            var user = userService.Get(id);
+            if (user == null) return Results.NotFound();
+            user.Role = newRole.Role;
+            userService.Update(id, user);
+            return Results.Ok();
+        }
+
+        public static IResult RemoveUser(Guid id, UserService userService)
+        {
+            if (userService.Remove(id))
+                return Results.Ok();
+            return Results.NotFound();
         }
     }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> RemoveUser(Guid id)
-    {
-        var result = await _userService.Remove(id);
-        if (!result)
-            return NotFound();
-        return NoContent();
-    }
-}
-
-public class RegisterRequest
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-public class LoginRequest
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-public class UpdateUserRequest
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
 }

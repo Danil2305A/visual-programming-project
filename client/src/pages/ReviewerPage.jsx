@@ -1,9 +1,9 @@
 import Reviewer from '../components/Reviewer/Reviewer';
 
-export default function ReviewerPage() {
+export default function ReviewerPage({ user }) {
     return (
         <div className="reviewer-page">
-            <Reviewer />
+            <Reviewer user={user} />
         </div>
     );
 }

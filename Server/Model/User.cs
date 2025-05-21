@@ -10,7 +10,7 @@ namespace Server.Model
         public required string Location { get; set; }
         public string? Bio { get; set; } = null;
         public List<string>? SocialLinks { get; set; } = null;
-        public string Role { get; set; } = "writer";
-        public DateTime CreatedAt { get; } = DateTime.UtcNow;
+        public string Role { get; set; } = "author";
+        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     }
 }
